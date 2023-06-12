@@ -22,26 +22,29 @@ def prompt_number(msg:str)->int:
 
 
 def should_play():
-    restart_game = input("Do you want to play? (Y | N)")
+    restart_game = input("Do you want to play? (Y | N) ")
     
-    if restart_game == "y" or restart_game == "Y":
+    if restart_game.lower() == "y":
         return True
-    elif restart_game == "n" or restart_game == "N":
+    else:
         return False
 
 
 def main():
     while should_play():
-        secret = randint(0, 200)
+        secret:int = randint(0, 200)
         user_num = prompt_number("What's your number?")
+        tries:int = 0
 
         while user_num != secret:
             if user_num > secret:
                 user_num = prompt_number("Secret number is less, try again.")
+                tries += 1
             elif user_num < secret:
+                tries += 1
                 user_num = prompt_number("Secret number is greater, try again.")
 
-        print("You guessed correctly!")
+        print(f"You guessed correctly in {tries} tries!")
 
 
 if __name__ == "__main__":
